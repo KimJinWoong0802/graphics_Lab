@@ -65,7 +65,7 @@ class Tiles():
         for tile in self.tiles:
             if not tile.isCorrectPos():
                 return False
-            return True
+        return True
 
 class Tile(Label):
     def __init__(self, parent, image, pos):
@@ -103,10 +103,10 @@ class Board(Frame):
         return image
 
     def bindKeys(self):
-        self.bind_all('<Key-Up>', self.slide)
-        self.bind_all('<Key-Down>', self.slide)
-        self.bind_all('<Key-Right>', self.slide)
-        self.bind_all('<Key-Left>', self.slide)
+        self.bind_all('<Up>', self.slide)
+        self.bind_all('<Down>', self.slide)
+        self.bind_all('<Right>', self.slide)
+        self.bind_all('<Left>', self.slide)
 
     def slide(self, event):
         self.tiles.slide(event.keysym)
@@ -150,7 +150,7 @@ class Main():
         self.board = Frame(self.parent)
         self.winFrame = Frame(self.parent)
         Label(self.winFrame, textvariable=self.winText, font=('',50)).pack(padx=10, pady=10)
-        Button(self.winFrame, text='Play Again', command = self.playAgain).pack(padx=10, pady=10)
+        Button(self.winFrame, text='Play Again', command=self.playAgain).pack(padx=10, pady=10)
 
     def start(self):
         image = self.image.get()
@@ -171,8 +171,10 @@ class Main():
     def playAgain(self):
         self.board.pack_forget()
         self.mainFrame.pack()
+        self.winFrame.pack_forget()
 
 if __name__ == "__main__":
     root = Tk()
+    root.title("Sliding Puzzle")
     Main(root)
     root.mainloop()
